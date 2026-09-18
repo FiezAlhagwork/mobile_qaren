@@ -2,6 +2,10 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    // آمنة لأن expo/tsconfig.base حاطط noEmit — ما في مخرجات JS ينكسر فيها
+    // المسار. بتخلّي الوحدات النقية (متل lib/query/retry.ts) تنحمّل بـ node
+    // مباشرة للاختبار، بدون Metro
+    "allowImportingTsExtensions": true,
     "paths": {
       "@/*": [
         "./*"
@@ -12,6 +16,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-  ]
+    "expo-env.d.ts",
+    "nativewind-env.d.ts"
+  ],
+  "exclude": ["node_modules", "app-example"]
 }

@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+  .tabs-icon {
+    @apply items-center justify-center;
+  }
+  .tabs-pill {
+    @apply h-11 w-11 items-center justify-center rounded-full;
+  }
+  .tabs-active {
+    @apply bg-card;
+  }
+  .tabs-glyph {
+    @apply h-[22px] w-[22px];
+  }
+}
