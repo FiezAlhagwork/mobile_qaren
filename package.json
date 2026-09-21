@@ -45,6 +45,7 @@
     "react-native-worklets": "0.10.1"
   },
   "devDependencies": {
+    "@types/invariant": "^2.2.37",
     "@types/react": "~19.2.10",
     "babel-preset-expo": "~57.0.0",
     "eslint": "^9.25.0",
