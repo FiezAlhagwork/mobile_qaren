@@ -30,12 +30,12 @@ my-app/
 
 | | ملاحظة |
 |---|---|
-| Node.js 20+ | |
+| Node.js **22.13+** | SDK 57 بيتطلبها. نسخة أقدم بتفشل عند `npm install` |
 | MongoDB | محلي أو Atlas — الرابط بينحط بـ `server/.env` |
 | حساب [Clerk](https://clerk.com) | مجاني. بدك منّو مفتاحين: عام وسري |
 | مفتاح [SerpAPI](https://serpapi.com) | للبحث عن المنتجات وأسعارها |
 | مفتاح [Gemini](https://ai.google.dev) | للتوصية وتوقّع السعر |
-| Expo Go على جوالك | أو محاكي أندرويد / iOS |
+| Expo Go على جوالك | آخر نسخة من المتجر — المشروع على **SDK 57** ولازم تطابقه |
 
 ---
 
@@ -130,6 +130,13 @@ EXPO_PUBLIC_API_URL=https://xxxx.ngrok-free.app
 - تأكد إنه الجوال والكمبيوتر على **نفس الواي فاي**.
 - بعض الشبكات (شبكات الجامعات خصوصاً) بتمنع الأجهزة من تشوف بعضها — جرّب
   هوتسبوت من جوالك، أو استعمل نفق.
+
+**`You need to be signed in to Expo Go and Expo CLI`**
+سجّل دخول بالطرفية `npx expo login`، **وكمان** جوّا تطبيق Expo Go بنفس الحساب.
+الاتنين مطلوبين. للتأكد: `npx expo whoami`.
+
+**`Project is incompatible with this version of Expo Go`**
+نسخة Expo Go عندك أحدث أو أقدم من SDK المشروع (57). حدّث التطبيق من المتجر.
 
 **`متغير البيئة ... ناقص`**
 ما عبّيت `mobile/.env`، أو عدّلته وما أعدت التشغيل بـ `-c`.
