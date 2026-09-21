@@ -4,6 +4,7 @@ import { Tabs } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { TAB_BAR, TAB_BAR_COLOR, TabIcon } from '@/components/ui/TabBar';
+import { useNotifications } from '@/hooks/useNotifications';
 import { useWatches } from '@/hooks/useWatches';
 import { deriveWatch } from '@/lib/watchDerive';
 
@@ -22,11 +23,12 @@ const TABS: { name: string; title: string; icon: keyof typeof Ionicons.glyphMap 
 export default function TabsLayout() {
   const insets = useSafeAreaInsets();
   const { data: watches } = useWatches();
+  const { data: notifications } = useNotifications();
 
-  // نقطة على تاب المراقبة لما يكون في هدف تحقق. نفس مفتاح الاستعلام يلي
-  // بتستخدمه شاشة المراقبة، فما في نداء شبكة إضافي. تاب الإشعارات ما بياخد
-  // نقطة: ما في مصدر بيانات إلو بعد
+  // نقطة على كل تاب من مصدره. التنين بيستعملوا نفس مفاتيح الاستعلام يلي
+  // بتستعملها الشاشات نفسها، فما في نداء شبكة إضافي
   const hasHitTarget = !!watches?.some((watch) => deriveWatch(watch).hitTarget);
+  const hasUnread = (notifications?.unreadCount ?? 0) > 0;
 
   return (
     <Tabs
@@ -73,7 +75,11 @@ export default function TabsLayout() {
               <TabIcon
                 focused={focused}
                 icon={tab.icon}
-                showBadge={tab.name === 'watchlist' && hasHitTarget && !focused}
+                showBadge={
+                  !focused &&
+                  ((tab.name === 'watchlist' && hasHitTarget) ||
+                    (tab.name === 'notifications' && hasUnread))
+                }
               />
             ),
           }}

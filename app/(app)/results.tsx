@@ -145,7 +145,11 @@ export default function ResultsScreen() {
 
                 return (
                   <Pressable
-                    key={product.id ?? `${product.store}-${index}`}
+                    // SerpAPI بيقدر يرجّع نفس product_id لأكتر من عرض (نفس
+                    // المنتج معروض عند متاجر مختلفة)، فالمعرّف لحالو مش فريد
+                    // بهالقائمة. الفهرس بيضمن التفرّد — بدونه React بيسقط صف
+                    // أو بيكرّره بصمت، مش بس بيطلع تحذير
+                    key={`${product.id ?? product.store}-${index}`}
                     onPress={() => open(product)}
                     disabled={!openable}
                     style={({ pressed }) => [

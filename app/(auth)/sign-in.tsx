@@ -44,7 +44,6 @@ export default function SignInScreen() {
       }
 
       if (signIn.status !== 'complete') {
-        // حالات متل 2FA — مش مدعومة بهالدفعة
         setError('حسابك بدو خطوة تحقق إضافية مش مدعومة حاليًا.');
         return;
       }
@@ -82,6 +81,7 @@ export default function SignInScreen() {
             سجّل دخولك لتتابع أسعار أجهزتك وقائمة المراقبة.
           </Text>
 
+        
           <Input
             label="البريد الإلكتروني"
             value={email}

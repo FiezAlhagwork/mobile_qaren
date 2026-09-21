@@ -34,6 +34,11 @@ export const queryKeys = {
     byWatch: (watchId: string) => [...queryKeys.history.all, watchId] as const,
   },
 
+  notifications: {
+    all: ['notifications'] as const,
+    list: () => [...queryKeys.notifications.all, 'list'] as const,
+  },
+
   /**
    * ⚠️ مفتوحة بـ productId **بس**، مش بكائن المنتج كامل.
    * السيرفر بيكاش بـ productId لوحده لمدة 24 ساعة، فلو حطينا كل الكائن

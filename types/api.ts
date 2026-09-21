@@ -249,3 +249,33 @@ export interface Prediction {
   factors: PredictionFactors;
   cached: boolean;
 }
+
+/**
+ * تنبيه نزول سعر. بينكتب من كرون السيرفر لما يتحقق هدف مراقبة.
+ *
+ * ⚠️ الاسم `AppNotification` مش `Notification` عن قصد — `Notification` اسم
+ * عام محجوز بأنواع DOM، والتظليل عليه بيعمل تضاربًا صامتًا.
+ *
+ * حقول المنتج **نسخة وقت الحدث**، مش مرجع للمراقبة: المستخدم بيقدر يحذف
+ * المراقبة والتنبيه لازم يضل مقروء بالسجل. ولهيك `watchId` بيصير `null`
+ * للصفوف اليتيمة — بتنعرض بس ما بتفتح سجل أسعار.
+ */
+export interface AppNotification {
+  _id: string;
+  watchId: string | null;
+  productName: string;
+  productImage: string | null;
+  /** السعر يلي حقّق الهدف */
+  price: number;
+  targetPrice: number;
+  store: string;
+  /** null = غير مقروء */
+  readAt: string | null;
+  createdAt: string;
+}
+
+export interface NotificationsResponse {
+  notifications: AppNotification[];
+  /** على كل غير المقروء، مش على الصفحة المعروضة بس */
+  unreadCount: number;
+}
